@@ -56,12 +56,16 @@
                         <form action="{{route('customer.login')}}" method="post">
                             @csrf
                             <div class="">
-                                <input type="text" class="form-control" name="" placeholder="Enter your email">
+                                <input type="text" class="form-control" name="email" placeholder="Enter your email">
                             </div>
                             <div class="">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
-                            <a href="#" class="btn_1 full_width text-center">Log in</a>
+                            <div>
+                                <input type="submit" class="btn btn-primary" value="login">
+                            </div>
+                            {{-- <a href="#" class="btn_1 full_width text-center">Log in</a> --}}
+
                             <p>Need an account? <a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal"
                                     href="#"> Sign
                                     Up</a></p>
@@ -136,7 +140,4 @@
     <script src="{{ asset('/') }}admin/js/dashboard_init.js"></script>
     <script src="{{ asset('/') }}admin/js/custom.js"></script>
 </body>
-
-<!-- Mirrored from demo.dashboardpack.com/sales-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Mar 2023 06:37:32 GMT -->
-
 </html>

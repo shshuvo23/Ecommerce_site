@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Session;
 
 class CustomerAuthController extends Controller
 {
@@ -21,16 +22,17 @@ class CustomerAuthController extends Controller
                 {
                     Session::put('customer_id', $this->customer->id);
                     Session::put('customer_name', $this->customer->name);
+                    Session::put('customer_image', $this->customer->image);
                     return redirect('/customer-dashboard');
                 }
                 else
                 {
-                    ret return redirect()->back()->with('message', 'does not match password or email');
+                     return redirect()->back()->with('message', 'does not match password or email');
                 }
             }
             else
             {
-                return redirect()->back()-with('message', 'Contact with Admin to Active your Account');
+                return redirect()->back()->with('message', 'Contact with Admin to Active your Account');
             }
         }
         else
@@ -38,6 +40,12 @@ class CustomerAuthController extends Controller
             return redirect()->back()->with('message', 'Check Your Email... Email is iinvalid');
         }
     }
+
+    public function dashboard()
+    {
+        return view('customer.dashboard.index');
+    }
+
     public function logout()
     {
         Session::forget('customer_id');

@@ -21,6 +21,6 @@ class CustomerController extends Controller
 
     public function manage()
     {
-        return view('admin.customer.customer_list',['customers' => Customer::orderBy('id', 'desc')->get()]);
+        return view('admin.customer.customer_list',['customer' => Customer::orderBy('id', 'desc')->get()]);
     }
 }

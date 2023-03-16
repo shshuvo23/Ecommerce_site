@@ -22,6 +22,11 @@ Route::get('/log/registertion', [HomeController::class, 'login'])->name('login-r
 
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
 
+// Route::middleware(['customer'])->group(function(){
+//     Route::get('/customer-dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
+// });
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
