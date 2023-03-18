@@ -47,10 +47,10 @@
             <div class="row">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Log in</h2>
+                        <h2 style="text-align: center;">Employee Log in</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('customer.login')}}" method="post">
+                        <form action="{{route('employee.login')}}" method="post">
                             @csrf
                             <div class="">
                                 <input type="text" class="form-control" name="email" placeholder="Enter your email">

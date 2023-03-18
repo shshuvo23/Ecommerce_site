@@ -3,7 +3,9 @@
 use App\Http\Controllers\Customer\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeAuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/log/registertion', [HomeController::class, 'login'])->name('login-registration');
+Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
 
@@ -37,4 +39,16 @@ Route::middleware([
     Route::get('/add/customer', [CustomerController::class, 'index'])->name('customer.add');
     Route::post('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::get('/customer/manage', [CustomerController::class, 'manage'])->name('customer.list');
+
+    Route::get('/add/employee', [EmployeeController::class, 'index'])->name('employee.add');
+    Route::post('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
+    Route::get('/employee/list', [EmployeeController::class, 'manage'])->name('employee.manage');
+    Route::get('/employee/Status/{id}', [EmployeeController::class, 'employeeStatus'])->name('employee.status');
+});
+
+Route::get('/employee/login', [EmployeeAuthController::class, 'index'])->name('employee');
+Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login');
+
+Route::middleware(['employee'])->group(function(){
+    Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
 });

@@ -1,4 +1,4 @@
-@extends('customer.master')
+@extends('employee.master')
 
 @section('pageTitle')
 Dasboard
@@ -11,6 +11,6 @@ Home Page
 
 @section('body')
 
-<h1>This is Customer dashboard</h1>
+<h1>This is Employee dashboard</h1>
 
 @endsection
