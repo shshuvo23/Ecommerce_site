@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="Board.html" aria-expanded="false">
+                <a href="{{route('employee.category-list')}}" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="{{ asset('/') }}admin/img/menu-icon/5.svg" alt="">
                     </div>
@@ -76,8 +76,8 @@
                     <span>Product</span>
                 </a>
                 <ul>
-                    <li><a href="">Add Product</a></li>
-                    <li><a href="">Product List </a></li>
+                    <li><a href="{{route('product.add')}}">Add Product</a></li>
+                    <li><a href="{{route('product.manage')}}">Product List </a></li>
                 </ul>
             </li>
             <li class="">

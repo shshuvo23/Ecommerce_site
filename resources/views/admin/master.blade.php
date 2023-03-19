@@ -86,8 +86,6 @@
                 <ul>
                     <li><a href="{{route('employee.add')}}">Add Employee</a></li>
                     <li><a href="{{route('employee.manage')}}">Employee List</a></li>
-                    <li><a href="Max_Length.html">Max Length</a></li>
-                    <li><a href="Layouts.html">Layouts</a></li>
                 </ul>
             </li>
 
@@ -99,8 +97,8 @@
                     <span>Category</span>
                 </a>
                 <ul>
-                    <li><a href="">Add category</a></li>
-                    <li><a href="">Category List</a></li>
+                    <li><a href="{{route('category.add')}}">Add category</a></li>
+                    <li><a href="{{route('category.manage')}}">Category List</a></li>
                 </ul>
             </li>
             <li class="">
@@ -111,9 +109,17 @@
                     <span>Brand</span>
                 </a>
                 <ul>
-                    <li><a href="">Add Brand</a></li>
-                    <li><a href="">Brand List</a></li>
+                    <li><a href="{{route('brand.add')}}">Add Brand</a></li>
+                    <li><a href="{{route('brand.manage')}}">Brand List</a></li>
                 </ul>
+            </li>
+            <li class="">
+                <a href="{{route('admin.product-list')}}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ asset('/') }}admin/img/menu-icon/7.svg" alt="">
+                    </div>
+                    <span>Product</span>
+                </a>
             </li>
 
             {{-- <li class="">

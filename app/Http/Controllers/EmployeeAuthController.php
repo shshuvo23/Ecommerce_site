@@ -51,6 +51,11 @@ class EmployeeAuthController extends Controller
         return view('employee.dashboard.index', [Session('employee_name')]);
     }
 
+    public function category()
+    {
+        return view();
+    }
+
     public function logout()
     {
         Session::forget('employee_id');
