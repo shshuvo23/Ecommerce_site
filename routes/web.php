@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'slider'])->name('slider');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
