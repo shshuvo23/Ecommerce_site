@@ -43,6 +43,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -53,6 +54,9 @@
                                 <th scope="row"><a href="#" class="question_content">{{ $loop->iteration }}</a>
                                 </th>
                                 <td class="fw-bold">{{ $category->name }}</td>
+                                <td>
+                                    <img src="{{asset($category->image)}}" alt="" height="100" width="150">
+                                </td>
                                 <td>
                                 <div class="col-md-6">
                                         <a href="{{route('category.edit', ['id' => $category->id])}}" class="badge rounded-pill bg-secondary">Edit</a>

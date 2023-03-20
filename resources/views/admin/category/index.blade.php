@@ -25,7 +25,7 @@
                 @endif
             </div>
             <div class="card-body">
-                <form action="{{route('category.create')}}" method="POST">
+                <form action="{{route('category.create')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <p class="text-success">{{Session::get('message')}}</p>
                     <div class="row">
@@ -33,6 +33,11 @@
                         <label for="">Category Name</label>
                         <input type="text" class="form-control" placeholder="name" name="name">
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Category Image</label>
+                            <input type="file" name="image" id="image" class="form-control" required>
+                        </div>
                     <div class="row">
                         <div class="col-md-3 py-3">
                             <input type="submit" class="btn btn-primary" value="Add new category">

@@ -69,7 +69,7 @@ Product List
                             <td>
                                <div class="col-md-6">
                                     <a href="" class="badge rounded-pill bg-info">Detail</a>
-                                    <a href="" class="badge rounded-pill bg-secondary">Edit</a>
+                                    <a href="{{route('product.edit', ['id' => $product->id])}}" class="badge rounded-pill bg-secondary">Edit</a>
                                     <a href="" class="badge rounded-pill bg-success">Status</a>
                                     <a href="" class="badge rounded-pill bg-danger">Delete</a>
                                </div>
