@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProductAddConfirmationMail;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Session;
+use Mail;
 
 class ProductController extends Controller
 {
+    public $product, $emailData = [];
     public function index()
     {
         return view('employee.product.index', ['brands' => Brand::all(), 'categories' => Category::all()]);
@@ -18,6 +21,15 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         Product::createProduct($request);
+
+        // $this->emailData = [
+        //     'product_name' => $request->input('product_name'),
+        //     'product_detail' => $request->input('product_detail'),
+        //     'price' => $request->input('price'),
+        // ];
+
+        // Mail::to('shshuvo44@gmail.com')->send(new ProductAddConfirmationMail($this->emailData));
+
         return redirect('/product/manage')->with('message', "Product Added");
     }
 

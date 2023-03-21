@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShowCategoryProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'slider'])->name('slider');
+Route::get('/category/{id}', [ShowCategoryProductController::class, 'showByCategory'])->name('category.product-show');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
