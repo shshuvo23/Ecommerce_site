@@ -46,9 +46,9 @@ Product List
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Product Name</th>
-                        <th scope="col">Product Category</th>
-                        <th scope="col">Brand</th>
                         <th scope="col">price</th>
+                        <th scope="col">discount</th>
+                        <th scope="col">New Price</th>
                         <th scope="col">Image</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -60,17 +60,19 @@ Product List
                             <th scope="row"><a href="#" class="question_content">{{ $loop->iteration }}</a>
                             </th>
                             <td>{{ $product->product_name }}</td>
-                            <td>{{ $product->category->name}}</td>
-                            <td>{{ $product->brand->name }}</td>
-                            <td>{{$product->price}}</td>
+                            <td>{{ $product->price}}</td>
+                            <td>{{ $product->discount}}%</td>
+                            <td>{{$product->new_price}}</td>
                             <td>
                                 <img src="{{asset($product->image)}}" alt="" height="100" width="150">
                             </td>
                             <td>
                                <div class="col-md-6">
-                                    <a href="" class="badge rounded-pill bg-info">Detail</a>
+                                    <a href="{{route('product.detail', ['id' => $product->id])}}" class="badge rounded-pill bg-info">Detail</a>
                                     <a href="{{route('product.edit', ['id' => $product->id])}}" class="badge rounded-pill bg-secondary">Edit</a>
                                     <a href="" class="badge rounded-pill bg-success">Status</a>
+                                    <a href="{{route('product.discount-remove', ['id' => $product->id])}}" class="badge rounded-pill bg-success">Discount Remove</a>
+                                    <a href="{{route('product.discount', ['id' =>$product->id])}}" class="badge rounded-pill bg-success">Discount</a>
                                     <a href="" class="badge rounded-pill bg-danger">Delete</a>
                                </div>
                             </td>

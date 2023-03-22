@@ -4,7 +4,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Customer Panel</title>
+    <title>Employee Panel</title>
 
 
     <link rel="stylesheet" href="{{ asset('/') }}admin/css/bootstrap1.min.css" />

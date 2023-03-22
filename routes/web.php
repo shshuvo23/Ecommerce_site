@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category/{id}', [ShowCategoryProductController::class, 'showByCategory'])->name('category.product-show');
+Route::get('/all-product', [HomeController::class, 'allProduct'])->name('product.all');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
@@ -60,6 +61,8 @@ Route::middleware([
     Route::get('/delete/brand/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 
     Route::get('/product-list', [ProductController::class, 'productList'])->name('admin.product-list');
+    Route::get('/product-list/{id}', [ProductController::class, 'productStatus'])->name('admin.product-Status');
+    Route::get('/product/detail/admin{id}' , [ProductController::class, 'productDetailadmin'])->name('admin.product-detail');
 
 
 
@@ -71,10 +74,10 @@ Route::middleware([
     Route::get('/employee/Status/{id}', [EmployeeController::class, 'employeeStatus'])->name('employee.status');
 });
 
-    Route::get('/employee/login', [EmployeeAuthController::class, 'index'])->name('employee');
-    Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login');
+Route::get('/employee/login', [EmployeeAuthController::class, 'index'])->name('employee');
+Route::post('/employee/login', [EmployeeAuthController::class, 'login'])->name('employee.login');
 
-Route::middleware(['employee'])->group(function(){
+Route::middleware(['employee'])->group(function () {
     Route::get('/employee/dashboard', [EmployeeAuthController::class, 'dashboard'])->name('employee.dashboard');
 
     Route::get('/employee/category-list', [CategoryController::class, 'categoryList'])->name('employee.category-list');
@@ -85,4 +88,10 @@ Route::middleware(['employee'])->group(function(){
     Route::get('/product/manage', [ProductController::class, 'manage'])->name('product.manage');
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+
+    Route::get('/product/discount/{id}', [ProductController::class, 'discountProduct'])->name('product.discount');
+    Route::Post('/product/discount-add/{id}', [ProductController::class, 'discountAddProduct'])->name('product.discount-add');
+    Route::get('/product/discount-remove/{id}', [ProductController::class, 'removeProductDiscount'])->name('product.discount-remove');
+
+    Route::get('/product/detail/{id}', [ProductController::class, 'productDetail'])->name('product.detail');
 });

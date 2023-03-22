@@ -47,8 +47,44 @@ class ProductController extends Controller
         return redirect('/product/manage')->with('message', 'updated Product Info');
     }
 
+    public function productStatus($id)
+    {
+        $statusChanged = Product::productStatusUpdate($id);
+        return redirect('/product-list')->with([
+            'messageStatus' => $statusChanged ? 'Product status updated' : null,
+            'productId' => $id
+        ]);
+    }
+
+    public function discountProduct($id)
+    {
+        return view('employee.product.addDiscount', ['product' =>product::find($id)]);
+    }
+
+    public function discountAddProduct(Request $request, $id)
+    {
+        Product::addDiscount($request, $id);
+        return redirect('/product/manage')->with('message' , 'Discount added for .$product->product_name');
+    }
+
+    public function removeProductDiscount($id)
+    {
+        Product::removeDiscount($id);
+        return redirect('/product/manage')->with('message' , 'Discount removed');
+    }
+
+    public function productDetail($id)
+    {
+        return view('employee.product.detail', ['product' => Product::find($id)]);
+    }
+
     public function productList()
     {
         return view('admin.product.index', ['products' => Product::orderBy('id', 'desc')->get()]);
+    }
+
+    public function productDetailadmin($id)
+    {
+        return view('admin.product.detail', ['product' => Product::find($id)]);
     }
 }

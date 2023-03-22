@@ -60,8 +60,7 @@ Product List
 
                         @foreach ($products as $product)
                             <tr>
-                                <th scope="row"><a href="#" class="question_content">{{ $loop->iteration }}</a>
-                                </th>
+                                <th scope="row"><a href="#" class="question_content">{{ $loop->iteration }}</a></th>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->category->name}}</td>
                                 <td>{{ $product->brand->name }}</td>
@@ -71,18 +70,23 @@ Product List
                                 </td>
                                 <td>{{ $product->employee->name }}</td>
                                 <td>
-                                    <div id="my-div" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{Session::get('message')}}</div>
                                     @if ($product->status == 1)
+                                        @if (session('productId') == $product->id)
+                                            <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                        @endif
                                         <button class="badge bg-success">Active</button>
                                     @else
-                                        <button class="badge bg-warning">Inactive</button>
+                                        @if (session('productId') == $product->id)
+                                            <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                        @endif
+                                        <button class="badge bg-danger">Inactive</button>
                                     @endif
                                 </td>
                                 <td>
                                    <div class="col-md-6">
-                                        <a href="" class="badge rounded-pill bg-info">Detail</a>
+                                        <a href="{{route('admin.product-detail', ['id' => $product->id])}}" class="badge rounded-pill bg-info">Detail</a>
                                         <a href="" class="badge rounded-pill bg-secondary">Edit</a>
-                                        <a href="" class="badge rounded-pill bg-success">Status</a>
+                                        <a href="{{route('admin.product-Status', ['id' => $product->id])}}" class="badge rounded-pill bg-success">Status</a>
                                         <a href="" class="badge rounded-pill bg-danger">Delete</a>
                                    </div>
                                 </td>
@@ -99,9 +103,14 @@ Product List
 @endsection
 
 <script>
-    setTimeout(function() {
-      document.getElementById("my-div").style.opacity = "0";
-      document.getElementById("my-div").style.visibility = "hidden";
-    }, 5000);
-  </script>
+    function hideMessageDiv(productId) {
+        document.getElementById("my-div-" + productId).style.opacity = "0";
+        document.getElementById("my-div-" + productId).style.visibility = "hidden";
+    }
 
+    @foreach ($products as $product)
+        setTimeout(function() {
+            hideMessageDiv({{ $product->id }});
+        }, 5000);
+    @endforeach
+</script>

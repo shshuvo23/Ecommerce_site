@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    private static $product, $message, $image, $extension, $directory, $imageName, $imageUrl;
+    private static $product, $discountPrice, $originalPrice, $message, $image, $extension, $directory, $imageName, $imageUrl;
 
     public static function getImageUrl($request)
     {
@@ -57,6 +57,46 @@ class Product extends Model
             self::$product->image = self::$imageUrl;
             self::$product->save();
         }
+    }
+    public static function addDiscount($request, $id)
+    {
+        self::$product = Product::find($id);
+        self::$product->discount = $request->discount;
+        self::$discountPrice = self::$product->price - (self::$product->price * (self::$product->discount / 100));
+        self::$product->new_price = self::$discountPrice;
+        self::$product->save();
+    }
+
+    public static function removeDiscount($id)
+    {
+        self::$product = Product::find($id);
+
+        // Check if the product has a discount
+        if (self::$product->discount > 0) {
+            // Calculate the original price
+            self::$originalPrice = self::$product->new_price / (1 - self::$product->discount);
+
+            // Set the product's price and discount to their original values
+            self::$product->price = self::$originalPrice;
+            self::$product->discount = 0;
+            self::$product->new_price = 0;
+            self::$product->save();
+        }
+    }
+
+
+    public static function productStatusUpdate($id)
+    {
+        self::$product = Product::find($id);
+        if (self::$product->status == 1) {
+            self::$product->status = 0;
+            self::$message = 'This Product Currently Stock out';
+        } else {
+            self::$product->status = 1;
+            self::$message = 'Status on';
+        }
+        self::$product->save();
+        return self::$message;
     }
 
     public function category()
