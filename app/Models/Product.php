@@ -99,6 +99,20 @@ class Product extends Model
         return self::$message;
     }
 
+    public static function productOfferStatus($id)
+    {
+        self::$product = Product::find($id);
+        if (self::$product->Offer_status == 1) {
+            self::$product->Offer_status = 0;
+            self::$message = 'This Product have no Offer Now';
+        } else {
+            self::$product->Offer_status = 1;
+            self::$message = 'This Product has ' . self::$product->discount . '% discount now';
+        }
+        self::$product->save();
+        return self::$message;
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

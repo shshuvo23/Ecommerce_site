@@ -152,7 +152,7 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
+                                            <a href="my-account.html">My Account{{ session('customer_name') }}</a>
                                         </li>
                                         <li>
                                             <a href="#">Initiate return</a>
@@ -165,9 +165,9 @@
                                         </li>
                                     </ul>
                                     <div class="login-btn">
-                                        <a href="{{ route('login-registration')}}" class="axil-btn btn-bg-primary">Login</a>
+                                        <a href="{{ route('customer.login-page')}}" class="axil-btn btn-bg-primary">Login</a>
                                     </div>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html" class="btn-link">REGISTER HERE.</a></div>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{route('customer.register-page')}}" class="btn-link">REGISTER HERE.</a></div>
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">

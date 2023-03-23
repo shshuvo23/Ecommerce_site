@@ -10,13 +10,13 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        Return view('admin.customer.customer_add');
+        Return view('customer.register');
     }
 
     public function create(Request $request)
     {
         Customer::newCustomer($request);
-        return redirect('/customer/manage')->with('message', 'New Customer Added');
+        return redirect('/customer-loginForm');
     }
 
     public function manage()

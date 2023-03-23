@@ -83,6 +83,13 @@ class ProductController extends Controller
         return view('admin.product.index', ['products' => Product::orderBy('id', 'desc')->get()]);
     }
 
+    public function productOfferStatus($id)
+    {
+        Product::productOfferStatus($id);
+        return redirect('/product-list')->with('message', 'Offer Status Chanage');
+
+    }
+
     public function productDetailadmin($id)
     {
         return view('admin.product.detail', ['product' => Product::find($id)]);

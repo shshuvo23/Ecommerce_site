@@ -46,9 +46,9 @@ Product List
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th>Product ID</th>
                             <th >Product Name</th>
-                            <th>Product Category</th>
-                            <th>Brand</th>
+                            <th>Discount</th>
                             <th >price</th>
                             <th >Image</th>
                             <th >Uploaded By</th>
@@ -57,36 +57,53 @@ Product List
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($products as $product)
-                            <tr>
-                                <th scope="row"><a href="#" class="question_content">{{ $loop->iteration }}</a></th>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->category->name}}</td>
-                                <td>{{ $product->brand->name }}</td>
-                                <td>{{$product->price}}</td>
-                                <td>
+                            <tr class="{{$product->discount > 0 ? 'bg-warning' : ''}}">
+                                <div class="col-md-2">
+                                    <td scope="row">{{ $loop->iteration }}</td>
+                                    <td>{{ $product->id }}</td>
+                                </div>
+                                <td class="col-md-2">{{ $product->product_name }}</td>
+                                <div class="col-md-2">
+                                    <td>{{ $product->discount}}</td>
+                                    <td>{{$product->price}}</td>
+                                </div>
+                                <td class="col-md-2">
                                     <img src="{{asset($product->image)}}" alt="" height="100" width="100">
                                 </td>
-                                <td>{{ $product->employee->name }}</td>
-                                <td>
-                                    @if ($product->status == 1)
-                                        @if (session('productId') == $product->id)
-                                            <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                <div class="col-md-2">
+                                    <td>{{ $product->employee->name }}</td>
+                                    <td>
+                                        @if ($product->status == 1)
+                                            @if (session('productId') == $product->id)
+                                                <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                            @endif
+                                            <button class="badge bg-success">Available</button>
+                                        @else
+                                            @if (session('productId') == $product->id)
+                                                <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                            @endif
+                                            <button class="badge bg-danger">Not Available</button>
                                         @endif
-                                        <button class="badge bg-success">Active</button>
-                                    @else
-                                        @if (session('productId') == $product->id)
-                                            <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                        @if ($product->Offer_status == 1)
+                                            @if (session('productId') == $product->id)
+                                                <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                            @endif
+                                            <button class="badge bg-success">offer</button>
+                                        @else
+                                            @if (session('productId') == $product->id)
+                                                <div id="my-div-{{ $product->id }}" style="opacity: 1; visibility: visible; transition: opacity 5s ease-out;">{{ session('messageStatus') }}</div>
+                                            @endif
+                                            <button class="badge bg-danger">No offer</button>
                                         @endif
-                                        <button class="badge bg-danger">Inactive</button>
-                                    @endif
-                                </td>
-                                <td>
+                                    </td>
+                                </div>
+                                <td class="col-md-2">
                                    <div class="col-md-6">
                                         <a href="{{route('admin.product-detail', ['id' => $product->id])}}" class="badge rounded-pill bg-info">Detail</a>
                                         <a href="" class="badge rounded-pill bg-secondary">Edit</a>
                                         <a href="{{route('admin.product-Status', ['id' => $product->id])}}" class="badge rounded-pill bg-success">Status</a>
+                                        <a href="{{route('admin.product-Offer-Status', ['id' => $product->id])}}" class="badge rounded-pill bg-success">Offer Status</a>
                                         <a href="" class="badge rounded-pill bg-danger">Delete</a>
                                    </div>
                                 </td>

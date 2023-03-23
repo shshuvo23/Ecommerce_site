@@ -11,6 +11,11 @@ class CustomerAuthController extends Controller
 {
     private $customer;
 
+    public function index()
+    {
+        return view('customer.login');
+    }
+
     public function login(Request $request)
     {
         $this->customer = Customer::where('email', $request->email)->first();
@@ -23,7 +28,7 @@ class CustomerAuthController extends Controller
                     Session::put('customer_id', $this->customer->id);
                     Session::put('customer_name', $this->customer->name);
                     Session::put('customer_image', $this->customer->image);
-                    return redirect('/customer-dashboard');
+                    return redirect('/');
                 }
                 else
                 {
@@ -43,7 +48,7 @@ class CustomerAuthController extends Controller
 
     public function dashboard()
     {
-        return view('customer.dashboard.index');
+        return view('website.home.index');
     }
 
     public function logout()

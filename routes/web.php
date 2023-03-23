@@ -28,7 +28,14 @@ Route::get('/category/{id}', [ShowCategoryProductController::class, 'showByCateg
 Route::get('/all-product', [HomeController::class, 'allProduct'])->name('product.all');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
+Route::get('/customer-registerForm', [CustomerController::class, 'index'])->name('customer.register-page');
+Route::post('/customer-register', [CustomerController::class, 'create'])->name('customer.register');
+
+
+Route::get('/customer-loginForm', [CustomerAuthController::class, 'index'])->name('customer.login-page');
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
+
+// Route::get('/customer/registertion', [])->name('customer.register-page');
 
 // Route::middleware(['customer'])->group(function(){
 //     Route::get('/customer-dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
@@ -61,7 +68,8 @@ Route::middleware([
     Route::get('/delete/brand/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 
     Route::get('/product-list', [ProductController::class, 'productList'])->name('admin.product-list');
-    Route::get('/product-list/{id}', [ProductController::class, 'productStatus'])->name('admin.product-Status');
+    Route::get('/product-list-offer/{id}', [ProductController::class, 'productStatus'])->name('admin.product-Status');
+    Route::get('/product-list/{id}', [ProductController::class, 'productOfferStatus'])->name('admin.product-Offer-Status');
     Route::get('/product/detail/admin{id}' , [ProductController::class, 'productDetailadmin'])->name('admin.product-detail');
 
 
