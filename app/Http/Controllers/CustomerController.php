@@ -18,6 +18,10 @@ class CustomerController extends Controller
         Customer::newCustomer($request);
         return redirect('/customer-loginForm');
     }
+    public function customerDashoard()
+    {
+        return view('customer.dashboard.index');
+    }
 
     public function manage()
     {
