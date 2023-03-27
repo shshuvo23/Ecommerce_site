@@ -1,4 +1,8 @@
 @extends('website.master')
+@php
+$url = route('cart.index');
+@endphp
+
 
 @section('body')
 <div class="axil-main-slider-area main-slider-style-1">
@@ -103,7 +107,7 @@
                     @foreach ($products as $product)
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                         <div class="axil-product product-style-one">
-                            <div class="thumbnail" style="height: 140px; width: 80%;">
+                            <div class="thumbnail" style="height: 140px; width: 90%;">
                                 <a href="single-product.html">
                                     <img data-sal="zoom-out" data-sal-delay="200" data-sal-duration="800" loading="lazy" class="main-img" src="{{asset($product->image)}}" alt="{{$product->product_name}}">
                                     <img class="hover-img" src="{{asset($product->image)}}" alt="Product Images">
@@ -118,9 +122,16 @@
                                     <ul class="cart-action">
                                         <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
                                         <li class="select-option">
-                                            <a href="single-product.html">
+                                            <form method="post" action="{{ route('cart.add') }}">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <!-- other input fields -->
+                                                <input type="number" name="quantity" value="1">
+                                                <button type="submit">Add to cart</button>
+                                            </form>
+                                            {{-- <a href="{{route('product.cart')}}">
                                                 Add to Cart
-                                            </a>
+                                            </a> --}}
                                         </li>
                                         <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                     </ul>

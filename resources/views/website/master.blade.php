@@ -140,11 +140,12 @@
                             </li>
                             @if (Session::get('customer_id'))
                                 <li class="shopping-cart">
-                                    <a href="#" class="cart-dropdown-btn">
-                                        <span class="cart-count">3</span>
+                                    <a href="{{route('cart.index')}}">
+                                        <span class="cart-count"></span>
                                         <i class="flaticon-shopping-cart"></i>
                                     </a>
                                 </li>
+
                             @endif
 
                             <li class="my-account">
@@ -156,7 +157,7 @@
                                         <span class="title">QUICKLINKS</span>
                                         <ul>
                                             <li>
-                                                <a href="{{route('customer.dashboard')}}">My Account</a>
+                                                <a href="{{route('customer.dashboard')}}">{{Session::get('customer_name')}}</a>
                                             </li>
                                             <li>
                                                 <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Log Out </a>

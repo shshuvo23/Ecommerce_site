@@ -22,7 +22,7 @@ class CustomerMiddleware
         }
         else
         {
-            return redirect('/login')->with('message', 'oi beta age login kor');
+            return redirect('/customer-loginForm')->with('message', 'oi beta age login kor');
         }
     }
 }

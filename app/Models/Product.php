@@ -127,4 +127,9 @@ class Product extends Model
     {
         return $this->belongsTo(Empolyee::class);
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

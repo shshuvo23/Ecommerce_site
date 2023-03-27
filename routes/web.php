@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShowCategoryProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,7 @@ Route::get('/login/registertion', [HomeController::class, 'login'])->name('login
 
 Route::get('/customer-registerForm', [CustomerController::class, 'index'])->name('customer.register-page');
 Route::post('/customer-register', [CustomerController::class, 'create'])->name('customer.register');
+// Route::get('/product/cart', [CartController::class, 'index'])->name('product.cart');
 
 
 Route::get('/customer-loginForm', [CustomerAuthController::class, 'index'])->name('customer.login-page');
@@ -103,3 +105,5 @@ Route::middleware(['employee'])->group(function () {
 
     Route::get('/product/detail/{id}', [ProductController::class, 'productDetail'])->name('product.detail');
 });
+
+
