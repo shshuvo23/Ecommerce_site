@@ -34,7 +34,13 @@ class HomeController extends Controller
 
     public function allProduct()
     {
-        return view('website.product.allproduct', ['products' => Product::where('status', 1)->simplePaginate(8)]);
+        $customerId = Session::get('customer_id');
+        if ($customerId) {
+            $count = Cart::where('customer_id', $customerId)->count();
+        } else {
+            $count = 0;
+        }
+        return view('website.product.allproduct', ['products' => Product::where('status', 1)->simplePaginate(8) , 'count' =>$count]);
     }
 
     // public function slider()
