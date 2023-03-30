@@ -7,7 +7,7 @@ use App\Http\Controllers\CartController;
 Route::middleware(['customer'])->group(function(){
 
     Route::get('/customer/dashboard', [CustomerController::class, 'customerDashoard'])->name('customer.dashboard');
-    Route::post('/product/cart', [CartController::class, 'add_to_cart'])->name('cart.add');
-    Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
-    Route::get('/product/cartItem', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{id}', [CartController::class, 'index'])->name('cart');
+    Route::get('/cart/view', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::get('/cart/delete/{id}', [CartController::class, 'deleteCart'])->name('cart.delete');
 });

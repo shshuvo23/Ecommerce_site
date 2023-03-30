@@ -1,7 +1,4 @@
 @extends('website.master')
-@php
-$url = route('cart.index');
-@endphp
 
 
 @section('body')
@@ -114,7 +111,7 @@ $url = route('cart.index');
                                 </a>
                                 <div class="label-block label-right">
                                     @if ($product->discount > 0)
-                                        <div class="product-badget">{{$product->discount*100}}%</div>
+                                        <div class="product-badget">{{$product->discount}}%</div>
                                     @endif
 
                                 </div>
@@ -122,13 +119,13 @@ $url = route('cart.index');
                                     <ul class="cart-action">
                                         <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
                                         <li class="select-option">
-                                            <form method="post" action="{{ route('cart.add') }}">
+                                            <form action="{{route('cart', [$product->id])}}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <!-- other input fields -->
-                                                <input type="number" name="quantity" value="1">
-                                                <button type="submit">Add to cart</button>
+                                                <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity">
+                                                <input class="btn btn-primary btn-sm" type="submit" value="Add to Cart">
                                             </form>
+
+
                                             {{-- <a href="{{route('product.cart')}}">
                                                 Add to Cart
                                             </a> --}}
@@ -151,8 +148,12 @@ $url = route('cart.index');
                                     </div>
                                     <h5 class="title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
                                     <div class="product-price-variant">
+                                        @if ($product->discount > 0 )
+                                        <span class="price current-price">{{$product->new_price}}</span>
+                                        <span class="price old-price">{{$product->price}}</span>
+                                        @else
                                         <span class="price current-price">{{$product->price}}</span>
-                                        {{-- <span class="price old-price">$49.99</span> --}}
+                                        @endif
                                     </div>
                                 </div>
                             </div>
