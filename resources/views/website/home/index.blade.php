@@ -117,11 +117,11 @@
                                 </div>
                                 <div class="product-hover-action">
                                     <ul class="cart-action">
-                                        <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                        <li class="quickview"><a href="{{route('product-detail', ['id' => $product->id])}}"><i class="far fa-eye"></i></a></li>
                                         <li class="select-option">
                                             <form action="{{route('cart', [$product->id])}}" method="post">
                                                 @csrf
-                                                <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity">
+                                                <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity" hidden>
                                                 <input class="btn btn-primary btn-sm" type="submit" value="Add to Cart">
                                             </form>
 

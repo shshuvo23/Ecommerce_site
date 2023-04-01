@@ -20,13 +20,24 @@ class CartController extends Controller
             }else{
                 $price = $product->price;
             }
-            // return $price;
-            $cart = new Cart();
-            $cart->customer_id = $customerId;
-            $cart->product_id = $product->id;
-            $cart->quantity = $request->quantity;
-            $cart->price = $price;
-            $cart->save();
+
+            $cart = Cart::where('customer_id', $customerId)
+                        ->where('product_id', $product->id)
+                        ->first();
+
+            if($cart){
+                $cart->quantity += $request->quantity;
+                // $cart->price += $price * $request->quantity;
+                $cart->save();
+            }else{
+                $cart = new Cart();
+                $cart->customer_id = $customerId;
+                $cart->product_id = $product->id;
+                $cart->quantity = $request->quantity;
+                $cart->price = $price * $request->quantity;
+                $cart->save();
+            }
+
             return redirect()->back();
         }
         else{
@@ -45,6 +56,37 @@ class CartController extends Controller
         }
 
         return view('website.cart.cartView', ['count' => $count, 'carts' => $carts]);
+    }
+
+    public function updateCart(Request $request, $id)
+    {
+        $customerId = Session::get('customer_id');
+        if($customerId)
+        {
+            $cart = Cart::find($id);
+
+            if($cart)
+            {
+                // return $cart;
+                $product = Product::find($cart->product_id);
+                // return $product;
+                if($product->discount > 0){
+                    $price = $product->new_price;
+                }else{
+                    $price = $product->price;
+                }
+                $cart->quantity = $request->quantity;
+                // $cart->price += $price * $request->quantity;
+                $cart->save();
+                // dd($request->quantity);
+                // dd($cart);
+                return redirect()->back();
+            }else{
+                return redirect('/cart/view')->with('message' , 'Try Again');
+            }
+        }else{
+            return redirect('/customer-loginForm');
+        }
     }
 
     public function deleteCart($id)

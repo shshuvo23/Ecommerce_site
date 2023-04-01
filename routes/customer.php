@@ -9,5 +9,6 @@ Route::middleware(['customer'])->group(function(){
     Route::get('/customer/dashboard', [CustomerController::class, 'customerDashoard'])->name('customer.dashboard');
     Route::post('/cart/{id}', [CartController::class, 'index'])->name('cart');
     Route::get('/cart/view', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::post('/cart/update/{id}', [CartController::class, 'updateCart'])->name('cart.update');
     Route::get('/cart/delete/{id}', [CartController::class, 'deleteCart'])->name('cart.delete');
 });

@@ -220,7 +220,7 @@
                                 </li>
                             </div>
                             <div class="profile_info">
-                                <img src="{{asset('/')}}admin/img/client_img.png" alt="#">
+                                <img src="{{asset(session('customer_image'))}}" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
                                         <h5>{{ session('customer_name') }}</h5>

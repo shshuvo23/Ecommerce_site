@@ -11,12 +11,21 @@
                 <div class="thumbnail">
                         <img src="{{asset($product->image)}}" alt="Product Images">
                     <div class="label-block label-right">
-                        <div class="product-badget">20% OFF</div>
+                        @if ($product->discount > 0)
+                        <div class="product-badget">{{$product->discount}} <b>%</b> </div>
+                        @endif
                     </div>
                     <div class="product-hover-action">
                         <ul class="cart-action">
                             <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                            <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                            <li class="select-option">
+                                <form action="{{route('cart', [$product->id])}}" method="post">
+                                    @csrf
+                                    <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity">
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Add to Cart">
+                                </form>
+
+                            </li>
                             <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
                         </ul>
                     </div>

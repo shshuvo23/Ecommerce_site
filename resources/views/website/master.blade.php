@@ -157,7 +157,10 @@
                                         <span class="title">QUICKLINKS</span>
                                         <ul>
                                             <li>
-                                                <a href="{{route('customer.dashboard')}}">{{Session::get('customer_name')}}</a>
+                                                <a href="{{route('customer.dashboard')}}">{{Session::get('customer_name')}}
+                                                    <img src="{{asset(Session::get('customer_image'))}}" alt="" height="50" width="50">
+                                                </a>
+
                                             </li>
                                             <li>
                                                 <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Log Out </a>

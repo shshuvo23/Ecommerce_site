@@ -32,12 +32,18 @@
                             <td class="product-thumbnail"><a href="single-product.html"><img src="{{asset($cart->product->image)}}" alt="Digital Product"></a></td>
                             <td class="product-title"><a href="single-product.html">{{$cart->product->product_name}}</a></td>
                             <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{$cart->price}}</td>
+                           <form action="{{route('cart.update', ['id' => $cart->id])}}" method="POST">
+                            @csrf
                             <td class="product-quantity" data-title="Qty">
                                 <div class="pro-qty">
-                                    <input type="number" class="quantity-input" value="{{$cart->quantity}}">
+                                    <input type="number" class="quantity-input" name="quantity" value="{{$cart->quantity}}">
+                                </div>
+                                <div>
+                                    <button type="submit">Update</button>
                                 </div>
                             </td>
-                            <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->price}}</td>
+                            </form>
+                            <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->price * $cart->quantity}}</td>
                         </tr>
                         @endforeach
                     </tbody>

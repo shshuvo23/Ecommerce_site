@@ -26,6 +26,7 @@ class EmployeeAuthController extends Controller
                 {
                     Session::put('employee_id', $this->employee->id);
                     Session::put('employee_name', $this->employee->name);
+                    Session::put('employee_image', $this->employee->image);
                     // return $this->employee->name;
 
                     return redirect('/employee/dashboard');

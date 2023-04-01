@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category/{id}', [ShowCategoryProductController::class, 'showByCategory'])->name('category.product-show');
+Route::get('/product-detail/{id}', [HomeController::class, 'productdetails'])->name('product-detail');
 Route::get('/all-product', [HomeController::class, 'allProduct'])->name('product.all');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 
@@ -36,6 +37,9 @@ Route::post('/customer-register', [CustomerController::class, 'create'])->name('
 
 Route::get('/customer-loginForm', [CustomerAuthController::class, 'index'])->name('customer.login-page');
 Route::post('/customer-login', [CustomerAuthController::class, 'login'])->name('customer.login');
+
+Route::get('/product/detail/{id}', [HomeController::class, 'productDetail'])->name('product.detail');
+
 
 // Route::get('/customer/registertion', [])->name('customer.register-page');
 

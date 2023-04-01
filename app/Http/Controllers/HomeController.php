@@ -27,6 +27,18 @@ class HomeController extends Controller
             'count' =>$count,
         ]);
     }
+
+    public function productdetails($id)
+    {
+        $customerId = Session::get('customer_id');
+        if ($customerId) {
+            $count = Cart::where('customer_id', $customerId)->count();
+        } else {
+            $count = 0;
+        }
+        $product = Product::find($id);
+        return view('website.product.product-detail', ['product' => $product, 'count' => $count]);
+    }
     public function login()
     {
         return view('website.auth.index');
