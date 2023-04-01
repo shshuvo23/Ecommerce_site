@@ -63,9 +63,12 @@
                     <div class="col-sm-6">
                         <div class="header-top-link">
                             <ul class="quick-link">
+                                @if (Session::get('customer_id'))
                                 <li><a href="#">Help</a></li>
                                 <li><a href="sign-up.html">Join Us</a></li>
+                                @else
                                 <li><a href="{{route('login-registration')}}">Sign In</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>

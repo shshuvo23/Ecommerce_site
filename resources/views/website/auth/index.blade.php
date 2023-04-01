@@ -50,6 +50,7 @@
                         <h2>Log in</h2>
                     </div>
                     <div class="card-body">
+                        <h2>{{session()->get('message')}}</h2>
                         <form action="{{route('customer.login')}}" method="post">
                             @csrf
                             <div class="">
