@@ -113,6 +113,14 @@ class Product extends Model
         return self::$message;
     }
 
+    public static function updateHitCount($id)
+    {
+        self::$product = Product::find($id);
+        self::$product->hit_count = self::$product->hit_count + 1;
+        self::$product->save();
+        return self::$product;
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

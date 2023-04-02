@@ -24,6 +24,7 @@ class HomeController extends Controller
             'recent_products' => Product::where('status', 1)->orderBy('id', 'desc')->take(8)->get(),
             'categories' => Category::all(),
             'products' => Product::where('status', 1)->orderBy('id' , 'desc')->take(12)->get(),
+            'populars' => Product::where('status', 1)->orderBy('hit_count', 'desc')->take(10)->get(),
             'count' =>$count,
         ]);
     }
@@ -36,7 +37,7 @@ class HomeController extends Controller
         } else {
             $count = 0;
         }
-        $product = Product::find($id);
+        $product = Product::updateHitCount($id);
         return view('website.product.product-detail', ['product' => $product, 'count' => $count]);
     }
     public function login()
@@ -53,6 +54,11 @@ class HomeController extends Controller
             $count = 0;
         }
         return view('website.product.allproduct', ['products' => Product::where('status', 1)->simplePaginate(8) , 'count' =>$count]);
+    }
+
+    public function popularProduct()
+    {
+        return view('website.home.popular-product');
     }
 
     // public function slider()

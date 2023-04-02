@@ -236,7 +236,7 @@
             </div>
         </div> --}}
         <!-- End Poster Countdown Area  -->
-
+        @yield('popularProduct')
         <!-- Start Expolre Product Area  -->
         @yield('product')
 

@@ -51,6 +51,67 @@
 
 @endsection
 
+@section('popularProduct')
+<div class="axil-best-seller-product-area bg-color-white axil-section-gap pb--50 pb_sm--30">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="title-highlighter highlighter-secondary"><i class="far fa-shopping-basket"></i>This Month</span>
+            <h2 class="title">Popular</h2>
+        </div>
+        <div class="new-arrivals-product-activation-2 slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide product-slide-mobile">
+            @foreach ($populars as $popular)
+            <div class="slick-single-layout">
+                <div class="axil-product product-style-three">
+                    <div class="thumbnail">
+                        <a href="single-product.html">
+                            <img data-sal="zoom-out" data-sal-delay="100" data-sal-duration="1500" src="{{asset($popular->image)}}" alt="Product Images">
+                        </a>
+                        <div class="product-hover-action">
+                            <ul class="cart-action">
+                                <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="label-block label-right py-2">
+                        @if ($popular->discount > 0)
+                            <span style="background-color: rgba(204, 218, 219, 0); border: 2px solid red; box-shadow: 0 0 5px red;">{{$popular->discount}}% Off Now</span>
+                        @endif
+
+                    </div>
+                    <div class="product-content">
+                        <div class="inner">
+                            <div class="product-rating">
+                                <span class="icon">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </span>
+                                <span class="rating-number">(64)</span>
+                            </div>
+                            <h5 class="title"><a href="single-product.html">{{$popular->product_name}}</a></h5>
+                            <div class="product-price-variant">
+                                @if($popular->discount > 0)
+                                <span class="price current-price">{{$popular->new_price}}</span>
+                                <span class="price old-price">{{$popular->price}}</span>
+                                @else
+                                <span class="price current-price">{{$popular->price}}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <!-- End .slick-single-layout -->
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('product')
 
 <div class="axil-product-area bg-color-white axil-section-gap">

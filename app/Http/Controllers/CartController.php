@@ -14,7 +14,7 @@ class CartController extends Controller
         $customerId = Session::get('customer_id');
         if($customerId)
         {
-            $product = Product::find($id);
+            $product = Product::updateHitCount($id);
             if($product->discount > 0){
                 $price = $product->new_price;
             }else{
