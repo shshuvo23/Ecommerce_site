@@ -85,18 +85,21 @@
                     <div class="icon_menu">
                         <img src="{{ asset('/') }}admin/img/menu-icon/5.svg" alt="">
                     </div>
-                    <span>Board</span>
-                </a>
-            </li>
-            <li class="">
-                <a href="invoice.html" aria-expanded="false">
-                    <div class="icon_menu">
-                        <img src="{{ asset('/') }}admin/img/menu-icon/6.svg" alt="">
-                    </div>
                     <span>Invoice</span>
                 </a>
             </li>
-
+            <li class="">
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{asset('/')}}admin/img/menu-icon/2.svg" alt="">
+                    </div>
+                    <span>My Account</span>
+                </a>
+                <ul>
+                    <li><a href="{{route('customer.account-detail')}}">Account Details</a></li>
+                    <li><a href="{{route('customer.account-edit')}}">Edit Account </a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
