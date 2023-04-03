@@ -28,17 +28,22 @@
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="category-select">
-
+                            <form action="{{ route('product.all') }}" method="GET">
+                                @csrf
                                 <!-- Start Single Select  -->
-                                <select class="single-select">
-                                    <option>Categories</option>
+                                <select class="single-select" name="category" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                    {{-- <option>Categories</option>
                                     <option>Fashion</option>
                                     <option>Electronics</option>
                                     <option>Furniture</option>
-                                    <option>Beauty</option>
+                                    <option>Beauty</option> --}}
+                                    <option value="{{ route('product.all') }}"{{ !request('category') ? 'selected' : '' }}>All</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ Request::get('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                                 <!-- End Single Select  -->
-
+                            </form>
                                 <!-- Start Single Select  -->
                                 <!-- End Single Select  -->
 

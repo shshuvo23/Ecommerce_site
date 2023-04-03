@@ -45,7 +45,7 @@ class HomeController extends Controller
         return view('website.auth.index');
     }
 
-    public function allProduct()
+    public function allProduct(Request $request)
     {
         $customerId = Session::get('customer_id');
         if ($customerId) {
@@ -53,7 +53,19 @@ class HomeController extends Controller
         } else {
             $count = 0;
         }
-        return view('website.product.allproduct', ['products' => Product::where('status', 1)->simplePaginate(8) , 'count' =>$count]);
+
+        $query = Product::where('status', 1);
+
+        if ($request->has('category') && $request->category != 'all') {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query->simplePaginate(8);
+        $categories = Category::all();
+
+        
+
+        return view('website.product.allproduct', ['products' => $products, 'categories' => $categories, 'count' => $count]);
     }
 
     public function popularProduct()
