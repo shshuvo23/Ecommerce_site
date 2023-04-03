@@ -31,10 +31,10 @@
                                     @endif
                                     <div class="price-amount price-offer-amount">
                                         @if ($product->discount > 0)
-                                        <span class="price current-price">{{$product->new_price}}</span>
-                                        <span class="price old-price">{{$product->price}}</span>
+                                        <span class="price current-price">{{$product->new_price}} <i class="fas fa-lira-sign"></i></i></span>
+                                        <span class="price old-price">{{$product->price}} <i class="fas fa-lira-sign"></i> </span>
                                         @else
-                                        <span class="price old-price">{{$product->price}}</span>
+                                        <span class="price current-price">{{$product->price}} <i class="fas fa-lira-sign"></i></span>
                                         @endif
                                     </div>
 

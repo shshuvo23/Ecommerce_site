@@ -18,6 +18,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/font-awesome.css">
+    {{-- <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/fontawesome-free-6.4.0-web/css/fontawesome.css">
+    <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/fontawesome-free-6.4.0-web/css/fontawesome.min.css"> --}}
     <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/flaticon/flaticon.css">
     <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/slick.css">
     <link rel="stylesheet" href="{{asset('/')}}website/assets/css/vendor/slick-theme.css">

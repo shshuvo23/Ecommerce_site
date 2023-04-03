@@ -70,7 +70,7 @@
                             <ul class="cart-action">
                                 <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                 <li class="select-option"><a href="cart.html">Add to Cart</a></li>
-                                <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                <li class="quickview"><a href="{{route('product-detail', ['id' => $popular->id])}}"><i class="far fa-eye"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                         </span>
                                 <span class="rating-number">(64)</span>
                             </div>
-                            <h5 class="title"><a href="single-product.html">{{$popular->product_name}}</a></h5>
+                            <h5 class="title"><a href="{{route('product-detail', ['id' => $popular->id])}}">{{$popular->product_name}}</a></h5>
                             <div class="product-price-variant">
                                 @if($popular->discount > 0)
                                 <span class="price current-price">{{$popular->new_price}}</span>
@@ -168,7 +168,7 @@
                                 </span>
                                         <span class="rating-number">(64)</span>
                                     </div>
-                                    <h5 class="title"><a href="single-product.html">{{ $product->product_name }}</a></h5>
+                                    <h5 class="title"><a href="{{route('product-detail', ['id' => $product->id])}}">{{ $product->product_name }}</a></h5>
                                     <div class="product-price-variant">
                                         @if ($product->discount > 0 )
                                         <span class="price current-price">{{$product->new_price}}</span>

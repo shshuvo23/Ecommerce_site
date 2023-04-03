@@ -39,6 +39,17 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function updateAccount(Request $request, $customerid)
+    {
+        $customerid = Customer::find(session('customer_id'));
+        // dd($request);
+        // return $request;
+        Customer::updateCustomer($request, $customerid);
+        // return $request->image;
+        return redirect('/account/detail')->with('message', 'Your data changes');
+
+    }
+
     public function manage()
     {
         return view('admin.customer.customer_list',['customer' => Customer::orderBy('id', 'desc')->get()]);

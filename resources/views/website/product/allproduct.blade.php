@@ -98,13 +98,13 @@
                                         <input class="btn btn-primary btn-sm" type="submit" value="Add to Cart">
                                     </form>
                                 </li>
-                                <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                <li class="quickview"><a href="{{route('product-detail', ['id' => $product->id])}}"><i class="far fa-eye"></i></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="product-content">
                         <div class="inner">
-                            <h5 class="title"><a href="single-product.html">{{$product->product_name}}</a></h5>
+                            <h5 class="title"><a href="{{route('product-detail', ['id' => $product->id])}}">{{$product->product_name}}</a></h5>
                             <div class="product-price-variant">
 
                                 @if ($product->discount > 0)

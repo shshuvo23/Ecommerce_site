@@ -15,10 +15,10 @@ class Customer extends Model
     {
         self::$image = $request->file('image');
         self::$extension = self::$image->getClientOriginalExtension();
-        self::$imageName = time().'.'.self::$extension;
+        self::$imageName = time() . '.' . self::$extension;
         self::$directory = 'customer-images/';
         self::$image->move(self::$directory, self::$imageName);
-        return self::$directory.self::$imageName;
+        return self::$directory . self::$imageName;
     }
 
     public static function newCustomer($request)
@@ -37,22 +37,17 @@ class Customer extends Model
     public static function updateCustomer($request, $id)
     {
         self::$customer = Customer::find($id);
-        if($request->file('image'))
-        {
-            if(file_exists(self::$customer->image))
-            {
+        if ($request->hasFile('image')) {
+            if (file_exists(self::$customer->image)) {
                 unlink(self::$customer->image);
             }
             self::$imageUrl = self::getImageUrl($request);
-        }
-        else
-        {
+        } else {
             self::$imageUrl = self::$customer->image;
         }
         self::$customer->name = $request->name;
         self::$customer->email = $request->email;
-        if($request->password)
-        {
+        if ($request->password) {
             self::$customer->password = bcrypt($request->password);
         }
         self::$customer->mobile = $request->mobile;
