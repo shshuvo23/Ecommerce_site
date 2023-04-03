@@ -56,16 +56,25 @@ class HomeController extends Controller
 
         $query = Product::where('status', 1);
 
+
         if ($request->has('category') && $request->category != 'all') {
             $query->where('category_id', $request->category);
+            $selectedCategoryId = $request->category;
+        } else {
+            $selectedCategoryId = null;
         }
 
         $products = $query->simplePaginate(8);
         $categories = Category::all();
 
-        
 
-        return view('website.product.allproduct', ['products' => $products, 'categories' => $categories, 'count' => $count]);
+
+        return view('website.product.allproduct', [
+            'products' => $products,
+            'categories' => $categories,
+            'selectedCategoryId' => $selectedCategoryId,
+            'count' => $count,
+        ]);
     }
 
     public function popularProduct()

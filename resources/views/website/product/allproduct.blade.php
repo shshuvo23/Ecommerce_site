@@ -31,15 +31,15 @@
                             <form action="{{ route('product.all') }}" method="GET">
                                 @csrf
                                 <!-- Start Single Select  -->
-                                <select class="single-select" name="category" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <select class="single-select" name="category"  onchange="this.form.submit()">
                                     {{-- <option>Categories</option>
                                     <option>Fashion</option>
                                     <option>Electronics</option>
                                     <option>Furniture</option>
                                     <option>Beauty</option> --}}
-                                    <option value="{{ route('product.all') }}"{{ !request('category') ? 'selected' : '' }}>All</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ Request::get('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="all" {{ request('category') == 'all' ? 'selected' : '' }}>All</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 <!-- End Single Select  -->
