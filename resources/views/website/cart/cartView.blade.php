@@ -31,7 +31,7 @@
                             <td class="product-remove"><a href="{{route('cart.delete', ['id' => $cart->id])}}" class="remove-wishlist"><i class="fal fa-times"></i></a></td>
                             <td class="product-thumbnail"><a href="single-product.html"><img src="{{asset($cart->product->image)}}" alt="Digital Product"></a></td>
                             <td class="product-title"><a href="single-product.html">{{$cart->product->product_name}}</a></td>
-                            <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{$cart->price}}</td>
+                            <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{$cart->product->price}}</td>
                            <form action="{{route('cart.update', ['id' => $cart->id])}}" method="POST">
                             @csrf
                             <td class="product-quantity" data-title="Qty">
@@ -43,7 +43,7 @@
                                 </div>
                             </td>
                             </form>
-                            <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->price * $cart->quantity}}</td>
+                            <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->product->price * $cart->quantity}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -57,7 +57,7 @@
                                     <tbody>
                                         <tr class="order-subtotal">
                                             <td>Subtotal</td>
-                                            <td>{{ $carts->sum(function ($cart) { return $cart->price * $cart->quantity; }) }}</td>
+                                            <td>{{ $carts->sum(function ($cart) { return $cart->product->price * $cart->quantity; }) }}</td>
                                         </tr>
                                         <tr class="order-shipping">
                                             <td>Shipping</td>
@@ -82,7 +82,7 @@
                                         </tr>
                                         <tr class="order-total">
                                             <td>Total</td>
-                                            <td class="order-total-amount">{{ $carts->sum(function ($cart) { return $cart->price * $cart->quantity; }) }}</td>
+                                            <td class="order-total-amount">{{ $carts->sum(function ($cart) { return $cart->product->price * $cart->quantity; }) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
