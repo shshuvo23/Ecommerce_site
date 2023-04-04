@@ -46,7 +46,7 @@
 
     <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-            <a href="index-2.html"><img src="{{ asset('/') }}admin/img/logo.png" alt=""></a>
+            <a href="{{route('home')}}"><img src="{{ asset('/') }}admin/img/logo.png" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>

@@ -39,6 +39,10 @@
                                     <input type="password" name="password" class="form-control">
                                 </div>
                                 <div class="">
+                                    <label for="">Mobile Number</label>
+                                    <input type="number" name="mobile" value="{{$customer->mobile}}" class="form-control">
+                                </div>
+                                <div class="">
                                     <label for="">Image</label>
                                     <input type="file" name="image" id="image" class="form-control">
                                     <img src="{{asset($customer->image)}}" alt="" height="50" width="50">

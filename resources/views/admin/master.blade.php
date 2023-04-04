@@ -121,6 +121,14 @@
                     <span>Product</span>
                 </a>
             </li>
+            <li class="">
+                <a href="{{route('admin.order-list')}}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ asset('/') }}admin/img/menu-icon/6.svg" alt="">
+                    </div>
+                    <span>Order List</span>
+                </a>
+            </li>
 
             {{-- <li class="">
                 <a class="has-arrow" href="#" aria-expanded="false">

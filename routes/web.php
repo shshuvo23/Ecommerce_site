@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShowCategoryProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +79,9 @@ Route::middleware([
     Route::get('/product-list-offer/{id}', [ProductController::class, 'productStatus'])->name('admin.product-Status');
     Route::get('/product-list/{id}', [ProductController::class, 'productOfferStatus'])->name('admin.product-Offer-Status');
     Route::get('/product/detail/admin{id}' , [ProductController::class, 'productDetailadmin'])->name('admin.product-detail');
+
+    Route::get('/order-list', [OrderController::class, 'OrderList'])->name('admin.order-list');
+
 
 
 

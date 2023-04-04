@@ -9,13 +9,15 @@ class Customer extends Model
 {
     use HasFactory;
 
+
     private static $customer, $image, $extension, $directory, $imageName, $imageUrl;
 
     public static function getImageUrl($request)
     {
         self::$image = $request->file('image');
+        // dd(self::$image);
         self::$extension = self::$image->getClientOriginalExtension();
-        self::$imageName = time() . '.' . self::$extension;
+        self::$imageName = time() . '.'. self::$customer->name. '.' . self::$extension;
         self::$directory = 'customer-images/';
         self::$image->move(self::$directory, self::$imageName);
         return self::$directory . self::$imageName;
@@ -37,7 +39,8 @@ class Customer extends Model
     public static function updateCustomer($request, $id)
     {
         self::$customer = Customer::find($id);
-        if ($request->hasFile('image')) {
+        // dd($id);
+        if ($request->file('image')) {
             if (file_exists(self::$customer->image)) {
                 unlink(self::$customer->image);
             }
@@ -47,13 +50,12 @@ class Customer extends Model
         }
         self::$customer->name = $request->name;
         self::$customer->email = $request->email;
-        if ($request->password) {
-            self::$customer->password = bcrypt($request->password);
-        }
+        self::$customer->password = bcrypt($request->password);
         self::$customer->mobile = $request->mobile;
         self::$customer->address = $request->address;
         self::$customer->image = self::$imageUrl;
         self::$customer->nid = $request->nid;
         self::$customer->save();
+
     }
 }
