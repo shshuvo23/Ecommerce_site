@@ -88,7 +88,7 @@
                     <span>Invoice</span>
                 </a>
             </li>
-            <li class="">
+            {{-- <li class="">
                 <a class="has-arrow" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="{{asset('/')}}admin/img/menu-icon/2.svg" alt="">
@@ -99,7 +99,7 @@
                     <li><a href="{{route('customer.account-detail')}}">Account Details</a></li>
                     <li><a href="{{route('customer.account-edit')}}">Edit Account </a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </nav>
 
@@ -229,7 +229,7 @@
                                         <h5>{{ session('customer_name') }}</h5>
                                     </div>
                                     <div class="profile_info_details">
-                                        <a href="#">My Profile </a>
+                                        <a href="{{route('customer.account-detail')}}">My Profile </a>
                                         <a href="#">Settings</a>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Log Out </a>
                                         <form action="{{route('logout')}}" method="POST" id="logoutForm">
