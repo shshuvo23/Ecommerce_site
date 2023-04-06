@@ -81,11 +81,11 @@
                 </ul>
             </li>
             <li class="">
-                <a href="Board.html" aria-expanded="false">
+                <a href="{{route('employee.order')}}" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="{{ asset('/') }}admin/img/menu-icon/5.svg" alt="">
                     </div>
-                    <span>Brand</span>
+                    <span>order List</span>
                 </a>
             </li>
             <li class="">

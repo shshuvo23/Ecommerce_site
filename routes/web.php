@@ -113,6 +113,8 @@ Route::middleware(['employee'])->group(function () {
     Route::get('/product/discount-remove/{id}', [ProductController::class, 'removeProductDiscount'])->name('product.discount-remove');
 
     Route::get('/product/detail/{id}', [ProductController::class, 'productDetail'])->name('product.detail');
+
+    Route::get('/employee/order-list', [OrderController::class, 'orderlistEmployee'])->name('employee.order');
 });
 
 

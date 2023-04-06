@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Session;
 
@@ -14,49 +15,43 @@ class CheckoutController extends Controller
     {
         $validatedData = $request->validate([
             'shipping_address' => 'required|string',
-            'notes' => 'nullable|string'
+            'notes' => 'nullable|string',
+            'total' => 'nullable|string',
         ]);
 
         // Retrieve the customer ID from the session
         $customer_id = Session::get('customer_id');
-        $order_number =
+        $cart_items = Cart::where('customer_id', $customer_id)->get();
 
-            // Create a new order using the customer ID and the input data
-            $data = array_merge(['customer_id' => $customer_id], $validatedData);
+        // Create a new order using the customer ID and the input data
+        $data = array_merge(['customer_id' => $customer_id], $validatedData);
         // dd($data);
         $order = Order::createOrder($data);
-        // dd($order);
+
+        $order_total = 0;
+        foreach ($cart_items as $cart_item) {
+            // Retrieve the product information for the cart item
+            $product = Product::find($cart_item->product_id);
+            // Create a new OrderItem instance
+            $order_item = new OrderItem();
+            $order_item->product_id = $product->id;
+            $order_item->quantity = $cart_item->quantity;
+            $order_item->price = $product->price;
+            $order_item->order_id = $order->id;
+            $order_item->save();
+            // Update the order total
+            $order_total += $order_item->quantity * $order_item->price;
+        }
+
+        $order->total = $order_total;
+        $order->save();
+        Cart::where('customer_id', $customer_id)->delete();
+        // dd($order_total);
 
         // Redirect to the order confirmation page
         return redirect()->route('orders.show', $order->id);
     }
 
-    public function order(Request $request)
-    {
-        $cartItems = Cart::getCartItems();
-        $data = [
-            'customer_id' =>Session::get('customer_id'),
-            'status' => 'pending',
-            'total' => Cart::getTotal(),
-            'payment_method' => $request->payment_method,
-            'shipping_address' => $request->shipping_address,
-            'billing_address' => $request->billing_address,
-            'notes' => $request->notes,
-            'order_number' => generateOrderNumber(),
-        ];
-
-        $orderItem = new OrderItem();
-        $orderItem->orderItemData($data, $cartItems);
-
-        // Process the order
-        $order = Order::where('order_number', $data['order_number'])->first();
-        $order->processOrder();
-
-        // Clear the cart
-        Cart::clearCart();
-
-        return redirect()->route('orders.show', $order);
-    }
 
     // public function checkout(Request $request)
     // {

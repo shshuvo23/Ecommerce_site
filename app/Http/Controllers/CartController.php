@@ -76,7 +76,7 @@ class CartController extends Controller
                     $price = $product->price;
                 }
                 $cart->quantity = $request->quantity;
-                // $cart->price = $price * $request->quantity;
+                $cart->price = $price * $request->quantity;
                 $cart->save();
                 // dd($request->quantity);
                 // dd($cart);

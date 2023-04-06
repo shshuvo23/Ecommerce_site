@@ -112,7 +112,8 @@
                             <form action="{{ route('checkout') }}" method="post">
                                 @csrf
                                 <label for="shipping_address">Shipping Address:</label>
-                                <input style="color: rgb(51, 231, 6); background: #8b8181;" type="text" name="shipping_address" id="shipping_address">
+                                <input style="color: rgb(51, 231, 6); background: #8b8181;" type="text"
+                                    name="shipping_address" id="shipping_address">
                                 <br>
                                 <label for="note">Note:</label>
                                 <textarea name="notes" id="note" style="color: rgb(51, 231, 6); background: #8b8181;"></textarea>

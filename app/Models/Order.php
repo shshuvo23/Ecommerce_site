@@ -36,7 +36,7 @@ class Order extends Model
         $order = new static();
         $order->customer_id = $data['customer_id'];
         $order->status = 'pending';
-        $order->total = 0.00; // Set the total to zero initially
+        $order->total = 0; // Set the total to zero initially
         $order->payment_method = 'cash_on_delivery';
         $order->payment_status = 'unpaid';
         $order->shipping_address = $data['shipping_address'];
@@ -50,6 +50,14 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

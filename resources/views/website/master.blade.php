@@ -114,7 +114,8 @@
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                         <li><a href="cart.html">Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="my-account.html">Account</a></li>
+                                        <li><a href="{{route('order.viewlist')}}">Order History</a></li>
+                                        {{-- <li><a href="my-account.html">Account</a></li>
                                         <li><a href="sign-up.html">Sign Up</a></li>
                                         <li><a href="sign-in.html">Sign In</a></li>
                                         <li><a href="forgot-password.html">Forgot Password</a></li>
@@ -122,7 +123,7 @@
                                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                                         <li><a href="coming-soon.html">Coming Soon</a></li>
                                         <li><a href="404.html">404 Error</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
+                                        <li><a href="typography.html">Typography</a></li> --}}
                                     </ul>
                                 </li>
                                 <li><a href="about-us.html">About</a></li>
