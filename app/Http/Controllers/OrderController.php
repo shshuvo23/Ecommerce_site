@@ -22,6 +22,20 @@ class OrderController extends Controller
         return view('employee.order.order-list', ['orders' => $orders]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $orders = Order::where('order_number', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('customer', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->get();
+
+        return view('employee.order.order-list', ['orders' => $orders]);
+    }
+
+
     public function show($id)
     {
 

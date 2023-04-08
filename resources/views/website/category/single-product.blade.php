@@ -21,7 +21,7 @@
                             <li class="select-option">
                                 <form action="{{route('cart', [$product->id])}}" method="post">
                                     @csrf
-                                    <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity">
+                                    <input type="number" value="1" min="1" style="100px" class="form-control" name="quantity" hidden>
                                     <input class="btn btn-primary btn-sm" type="submit" value="Add to Cart">
                                 </form>
 
@@ -32,10 +32,15 @@
                 </div>
                 <div class="product-content">
                     <div class="inner">
-                        <h5 class="title"><a href="single-product.html">3D™ wireless headset</a></h5>
+                        <h5 class="title"><a href="single-product.html">{{$product->product_name}}</a></h5>
                         <div class="product-price-variant">
-                            <span class="price current-price">$30</span>
-                            <span class="price old-price">$30</span>
+                            @if ($product->discount > 0 )
+                            <span class="price current-price">{{$product->new_price}}</span>
+                            <span class="price old-price">{{$product->price}}</span>
+                            @else
+                            <span class="price current-price">{{$product->price}}</span>
+
+                            @endif
                         </div>
                     </div>
                 </div>

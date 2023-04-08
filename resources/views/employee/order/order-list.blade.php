@@ -21,9 +21,9 @@ order-list
             <div class="box_right d-flex lms_block">
                 <div class="serach_field_2">
                     <div class="search_inner">
-                        <form Active="#">
+                        <form method="GET" action="{{ route('order.search') }}">
                             <div class="search_field">
-                                <input type="text" placeholder="Search content here...">
+                                <input type="text" name="search" placeholder="Search content here..." value="{{ old('search') }}">
                             </div>
                             <button type="submit"> <i class="ti-search"></i> </button>
                         </form>
@@ -54,11 +54,18 @@ order-list
                             <td>{{ $order->customer_id }}({{$order->customer->name}})</td>
                             <td>{{ $order->order_number}}</td>
                             <td>{{$order->total}}</td>
-                            <td>{{$order->status}}</td>
+                            @if($order->status == 'pending')
+                            <td class="badge bg-primary" style="color: white">{{ $order->status }}</td>
+                            @elseif ($order->status == 'complete')
+                            <td class="badge bg-success" style="color: black">{{ $order->status }}</td>
+                            @else
+                            <td class="badge bg-light text-dark" style="color: white">{{ $order->status }}</td>
+                            @endif
+                            {{-- <td>{{$order->status}}</td> --}}
                             <td>{{ $order->created_at->format('d-M-Y') }}</td>
                             <td>
                                 <div class="col-lg-12">
-                                    <a href="{{route('order.status-shipment', ['id' => $order->id])}}" class="badge rounded-pill bg-success">shipment</a>
+                                    <a href="{{route('order.status-shipment', ['id' => $order->id])}}" class="badge rounded-pill bg-success">Update status</a>
                                     {{-- <a href="" class="badge rounded-pill bg-success">complete</a> --}}
                                 </div>
                                {{-- <div class="col-md-6">
