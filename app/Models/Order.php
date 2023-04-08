@@ -47,10 +47,28 @@ class Order extends Model
         return $order;
     }
 
+    public static function markAsShipped($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'shipped';
+        // $order->employee_id = [Session::get('employee_id')];
+        $order->save();
+    }
+    public static function markAsComplete($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'complete';
+        $order->save();
+    }
+
 
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+    public function employee()
+    {
+        return $this->belongsTo(Empolyee::class, 'customer_id');
     }
     public function product()
     {

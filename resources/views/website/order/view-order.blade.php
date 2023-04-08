@@ -43,6 +43,13 @@
                                 @endforeach
                             </ul>
                             <ul>Total: {{ $order->total }}</ul>
+                          @if ($order->status == 'complete')
+                          <p>Thank you for buying our product, Give us your feedback and stay with us</p>
+                          <a href="{{route('home')}}">See Our Product</a>
+                          @else
+                          <ul><a href="{{route('order.complete', ['id' => $order->id])}}">Receice Product</a></ul>
+                          @endif
+
                         </td>
                         </tr>
                     @endforeach

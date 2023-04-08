@@ -52,4 +52,20 @@ class OrderController extends Controller
 
         return view('website.order.view-order', ['count' => $count, 'orders' => $orders]);
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+
+        Order::markAsShipped($id);
+
+        return back()->with('success', 'Order status updated successfully.');
+    }
+
+    public function orderComplete(Request $request, $id)
+    {
+
+        Order::markAsComplete($id);
+
+        return back()->with('success', 'Order status updated successfully.');
+    }
 }

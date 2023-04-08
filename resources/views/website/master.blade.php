@@ -112,7 +112,7 @@
                                     <a href="#">Pages</a>
                                     <ul class="axil-submenu">
                                         <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
+                                        <li><a href="{{route('cart.view')}}">Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="{{route('order.viewlist')}}">Order History</a></li>
                                         {{-- <li><a href="my-account.html">Account</a></li>

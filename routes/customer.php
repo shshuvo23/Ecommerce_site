@@ -23,4 +23,5 @@ Route::middleware(['customer'])->group(function(){
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::post('/checkout', [CheckoutController::class, 'processOrder'])->name('checkout');
     Route::get('/view-orderlist', [OrderController::class, 'viewOrder'])->name('order.viewlist');
+    Route::get('/order-compelete/{id}', [OrderController::class, 'orderComplete'])->name('order.complete');
 });

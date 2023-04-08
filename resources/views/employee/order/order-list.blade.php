@@ -58,8 +58,8 @@ order-list
                             <td>{{ $order->created_at->format('d-M-Y') }}</td>
                             <td>
                                 <div class="col-lg-12">
-                                    <a href="" class="badge rounded-pill bg-success">shipment</a>
-                                    <a href="" class="badge rounded-pill bg-success">complete</a>
+                                    <a href="{{route('order.status-shipment', ['id' => $order->id])}}" class="badge rounded-pill bg-success">shipment</a>
+                                    {{-- <a href="" class="badge rounded-pill bg-success">complete</a> --}}
                                 </div>
                                {{-- <div class="col-md-6">
                                     <a href="{{route('product.detail', ['id' => $product->id])}}" class="badge rounded-pill bg-info">Detail</a>
