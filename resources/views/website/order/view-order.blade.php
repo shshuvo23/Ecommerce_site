@@ -47,7 +47,9 @@
                           <p>Thank you for buying our product, Give us your feedback and stay with us</p>
                           <a href="{{route('home')}}">See Our Product</a>
                           @else
-                          <ul><a href="{{route('order.complete', ['id' => $order->id])}}">Receice Product</a></ul>
+                            @if ($order->status == 'shipped')
+                            <ul><a href="{{route('order.complete', ['id' => $order->id])}}">Receice Product</a></ul>
+                            @endif
                           @endif
 
                         </td>

@@ -9,10 +9,10 @@
 <body>
 
     <div class="div-one">
-        <h5>New Product Added Details: </h5>
-        <h4> {{$value['product_name']}} </h4>
-        <p>brand: {{$value['product_detail']}}</p>
-        <p>Price: {{$value['price']}}</p>
+        <h5>Dear {{$value['name']}},</h5><p>Thankyou for purchase product from us</p><br>
+        <h4>Order no: {{$value['order_no']}} </h4>
+        <p>Product Name: {{$value['product_name']}}</p><p>Quantity: {{$value['quantity']}}</p>
+        <h5>Your Bill:{{$value['total']}}</h5>
         <hr/>
         <p>Thank You</p>
 

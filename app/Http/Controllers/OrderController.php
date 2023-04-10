@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
+use App\Mail\ShipmentConfirmationMail;
 use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+
+    private $emailData = [];
+
     public function orderList()
     {
         $orders = Cart::all();
@@ -62,7 +69,7 @@ class OrderController extends Controller
             $count = 0;
         }
         // Retrieve the orders for the customer
-        $orders = Order::where('customer_id', $customerId)->get();
+        $orders = Order::where('customer_id', $customerId)->orderBy('id', 'desc')->get();
 
         return view('website.order.view-order', ['count' => $count, 'orders' => $orders]);
     }
@@ -70,7 +77,23 @@ class OrderController extends Controller
     public function updateStatus(Request $request, $id)
     {
 
-        Order::markAsShipped($id);
+         Order::markAsShipped($id);
+        $order = Order::find($id);
+        $orderIteam = OrderItem::find($id);
+        $orderNumber = $order->order_number;
+        $customerName = $order->customer->name;
+        $productName = $orderIteam->product->product_name;
+        $quantity = $orderIteam->quantity;
+        $total = $order->total;
+        $this->emailData = [
+            'name'      => $customerName,
+            'order_no'  => $orderNumber,
+            'product_name' => $productName,
+            'quantity' => $quantity,
+            'total' => $total,
+        ];
+
+        Mail::to('shshuvo44@gmail.com')->send(new ShipmentConfirmationMail($this->emailData));
 
         return back()->with('success', 'Order status updated successfully.');
     }

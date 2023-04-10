@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class CheckoutController extends Controller
@@ -47,7 +49,7 @@ class CheckoutController extends Controller
         $order->save();
         Cart::where('customer_id', $customer_id)->delete();
         // dd($order_total);
-
+        // Mail::to('shshuvo44@gmail.com')->send(new OrderConfirmationMail);
         // Redirect to the order confirmation page
         return redirect()->route('orders.show', $order->id);
     }

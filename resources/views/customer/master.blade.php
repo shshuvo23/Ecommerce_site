@@ -73,11 +73,10 @@
                     <div class="icon_menu">
                         <img src="{{asset('/')}}admin/img/menu-icon/2.svg" alt="">
                     </div>
-                    <span>Customer</span>
+                    <span>Order</span>
                 </a>
                 <ul>
-                    <li><a href="">Add Customer</a></li>
-                    <li><a href="">Customer List </a></li>
+                    <li><a href="">  </a></li>
                 </ul>
             </li>
             <li class="">
