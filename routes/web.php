@@ -115,6 +115,7 @@ Route::middleware(['employee'])->group(function () {
     Route::get('/product/detail/{id}', [ProductController::class, 'productDetail'])->name('product.detail');
 
     Route::get('/employee/order-status/{id}', [OrderController::class, 'updateStatus'])->name('order.status-shipment');
+    // Route::get('/employee/order-status/{id}', [OrderController::class, 'shipOrder'])->name('order.status-shipment');
     Route::get('/employee/order-list', [OrderController::class, 'orderlistEmployee'])->name('employee.order');
     Route::get('/order/search', [OrderController::class,'search'])->name('order.search');
 

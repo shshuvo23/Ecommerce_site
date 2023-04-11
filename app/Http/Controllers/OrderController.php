@@ -8,7 +8,10 @@ use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Shipment;
+use Carbon\Carbon;
 use Session;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -77,23 +80,47 @@ class OrderController extends Controller
     public function updateStatus(Request $request, $id)
     {
 
-         Order::markAsShipped($id);
+        Order::markAsShipped($id);
         $order = Order::find($id);
-        $orderIteam = OrderItem::find($id);
+        // $shipped = Shipment::find($id);
+        $orderItems = OrderItem::where('order_id', $id)->get();
+
         $orderNumber = $order->order_number;
         $customerName = $order->customer->name;
-        $productName = $orderIteam->product->product_name;
-        $quantity = $orderIteam->quantity;
+        $customerEmail = $order->customer->email;
         $total = $order->total;
+        $address = $order->shipping_address;
+
+        $trankingid = $order->shipment->tracking_id;
+        $shipment_date = $order->shipment->shipment_date;
+
         $this->emailData = [
             'name'      => $customerName,
+            'email'      => $customerEmail,
             'order_no'  => $orderNumber,
-            'product_name' => $productName,
-            'quantity' => $quantity,
             'total' => $total,
+            'address' => $address,
+            'tracking_id' => $trankingid,
+            'shipment_date' => $shipment_date,
+            'products' => [],
+
         ];
 
-        Mail::to('shshuvo44@gmail.com')->send(new ShipmentConfirmationMail($this->emailData));
+        if ($orderItems) {
+            foreach ($orderItems as $orderItem) {
+                $productName = $orderItem->product->product_name ?? 'Unknown';
+                $productPrice = $orderItem->product->price ?? 0;
+                $quantity = $orderItem->quantity;
+                $productData = [
+                    'product_name' => $productName,
+                    'product_price' => $productPrice,
+                    'quantity' => $quantity
+                ];
+                $this->emailData['products'][] = $productData;
+            }
+        }
+        // dd($this->emailData);
+        Mail::to($customerEmail)->send(new ShipmentConfirmationMail($this->emailData));
 
         return back()->with('success', 'Order status updated successfully.');
     }

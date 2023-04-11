@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 use Session;
 
 class Order extends Model
@@ -30,6 +31,14 @@ class Order extends Model
         return $number;
     }
 
+    public static function generateTrackingId()
+    {
+        $characterc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = 'abcdefghijklmnopqrstuvwxyz';
+        $digits = '0123456789';
+        $tracking_id = substr(str_shuffle($characterc), 0, 4) . '-' . substr(str_shuffle($digits), 0, 6) . '-' . substr(str_shuffle($characters), 0, 2);
+        return $tracking_id;
+    }
 
     public static function createOrder(array $data)
     {
@@ -53,6 +62,17 @@ class Order extends Model
         $order->status = 'shipped';
         // $order->employee_id = [Session::get('employee_id')];
         $order->save();
+
+        // $trackingId = Uuid::uuid4()->toString();
+        $trackingId = Order::generateTrackingId();
+
+        // Create a new shipment record
+        $shipment = new Shipment([
+            'order_id' => $order->id,
+            'tracking_id' => $trackingId,
+            'shipment_date' => now() // or you can set any other date/time you need
+        ]);
+        $shipment->save();
     }
     public static function markAsComplete($id)
     {
@@ -77,5 +97,9 @@ class Order extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+    public function shipment()
+    {
+        return $this->hasOne(shipment::class);
     }
 }
