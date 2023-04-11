@@ -999,10 +999,18 @@
                             <div class="inner">
                                 <ul>
                                     <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
+                                    @if (Session::get('customer_id'))
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="shop.html">Shop</a></li>
+                                    @else
+                                    <li><a href="{{route('employee.login')}}">Employee Account</a></li>
+                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="shop.html">Shop</a></li>
+                                    @endif
+
+
                                 </ul>
                             </div>
                         </div>

@@ -64,10 +64,19 @@ order-list
                             {{-- <td>{{$order->status}}</td> --}}
                             <td>{{ $order->created_at->format('d-M-Y') }}</td>
                             <td>
+                                @if ($order->status == 'shipped')
+                                <div class="col-lg-12">
+                                    <p class="badge rounded-pill bg-secondary">Shipped already</p>
+                                    {{-- <a href="" class="badge rounded-pill bg-success">complete</a> --}}
+                                </div>
+                                @elseif ($order->status == 'complete')
+                                <p class="badge rounded-pill bg-success">Completed</p>
+                                @else
                                 <div class="col-lg-12">
                                     <a href="{{route('order.status-shipment', ['id' => $order->id])}}" class="badge rounded-pill bg-success">Update status</a>
                                     {{-- <a href="" class="badge rounded-pill bg-success">complete</a> --}}
                                 </div>
+                                @endif
                                {{-- <div class="col-md-6">
                                     <a href="{{route('product.detail', ['id' => $product->id])}}" class="badge rounded-pill bg-info">Detail</a>
                                     <a href="{{route('product.edit', ['id' => $product->id])}}" class="badge rounded-pill bg-secondary">Edit</a>
