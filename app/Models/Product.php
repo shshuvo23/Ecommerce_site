@@ -64,6 +64,7 @@ class Product extends Model
         self::$product->discount = $request->discount;
         self::$discountPrice = self::$product->price - (self::$product->price * (self::$product->discount / 100));
         self::$product->new_price = self::$discountPrice;
+        self::$product->Offer_status = 1;
         self::$product->save();
     }
 
@@ -74,13 +75,16 @@ class Product extends Model
         // Check if the product has a discount
         if (self::$product->discount > 0) {
             // Calculate the original price
-            self::$originalPrice = self::$product->new_price / (1 - self::$product->discount);
+            // self::$originalPrice = self::$product->new_price / (1 - self::$product->discount);
 
             // Set the product's price and discount to their original values
-            self::$product->price = self::$originalPrice;
+            // self::$product->price = self::$originalPrice;
             self::$product->discount = 0;
-            self::$product->new_price = 0;
+            self::$product->new_price = self::$product->price;
             self::$product->save();
+        }
+        else{
+            self::$product->Offer_status = 0;
         }
     }
 

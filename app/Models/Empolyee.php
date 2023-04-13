@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Empolyee extends Model
 {
     use HasFactory;
+    use Notifiable;
     private static $employee, $image, $extension, $directory, $imageName, $imageUrl, $message;
 
     public static function getImageUrl($request)
@@ -49,5 +51,16 @@ class Empolyee extends Model
         }
         self::$employee->save();
         return self::$message;
+    }
+
+    public function routeNotificationForDatabase()
+    {
+        return $this->id; // Return the appropriate notifiable ID (e.g., employee ID)
+    }
+
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'employee_id', 'id');
     }
 }

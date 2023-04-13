@@ -29,6 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category/{id}', [ShowCategoryProductController::class, 'showByCategory'])->name('category.product-show');
 Route::get('/product-detail/{id}', [HomeController::class, 'productdetails'])->name('product-detail');
 Route::get('/all-product', [HomeController::class, 'allProduct'])->name('product.all');
+Route::get('/product-offer', [HomeController::class, 'offerProduct'])->name('product.offer');
 // Route::get('/popular-product', [HomeController::class, 'popularProduct'])->name('product.popular');
 Route::get('/login/registertion', [HomeController::class, 'login'])->name('login-registration');
 

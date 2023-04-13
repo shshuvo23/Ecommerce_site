@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-lg-9">
                                 <div class="category-select">
-                                    <form action="{{ route('product.all') }}" method="GET">
+                                    <form action="{{ route('product.offer') }}" method="GET">
                                         @csrf
                                         <!-- Start Single Select  -->
                                         <select class="single-select" name="category" onchange="this.form.submit()">
@@ -44,6 +44,7 @@
                                                     {{ $category->name }}</option>
                                             @endforeach
                                         </select>
+
                                         <!-- End Single Select  -->
                                     </form>
                                     <!-- Start Single Select  -->
@@ -79,7 +80,9 @@
             </div>
             <div class="row row--15">
                 @if ($products->isEmpty())
+                   <div class="py-3">
                     <p>Product not available in this category.</p>
+                   </div>
                 @else
                     @foreach ($products as $product)
                         <div class="col-xl-3 col-lg-4 col-sm-6">

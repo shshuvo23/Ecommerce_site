@@ -34,11 +34,11 @@
 
 <body class="sticky-header newsletter-popup-modal">
     <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
-    <header class="header axil-header header-style-1">
+    <header class="header axil-header header-style-5">
         <div class="axil-header-top">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-sm-6">
+                    <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-dropdown">
                             <div class="dropdown">
                                 <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -62,9 +62,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-link">
-                            <ul class="quick-link">
+                             <ul class="quick-link">
                                 @if (Session::get('customer_id'))
                                 <li><a href="#">Help</a></li>
                                 <li><a href="sign-up.html">Join Us</a></li>
@@ -101,14 +101,14 @@
                             </div>
                             <ul class="mainmenu">
                                 <li><a href="{{route('home')}}">Home</a></li>
-                                <li class="menu-item-has-children">
+                                 <li class="menu-item-has-children">
                                     <a href="#">Products</a>
                                     <ul class="axil-submenu">
                                         <li><a href="shop-sidebar.html">Shop With Sidebar</a></li>
                                         <li><a href="shop.html">Shop no Sidebar</a></li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
+                               <li class="menu-item-has-children">
                                     <a href="#">Pages</a>
                                     <ul class="axil-submenu">
                                         <li><a href="wishlist.html">Wishlist</a></li>
@@ -134,7 +134,13 @@
                     </div>
                     <div class="header-action">
                         <ul class="action-list">
-                            <li class="axil-search">
+                            <li class="axil-search d-xl-block d-none">
+                                <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="What are you looking for?" autocomplete="off">
+                                <button type="submit" class="icon wooc-btn-search">
+                                    <i class="flaticon-magnifying-glass"></i>
+                                </button>
+                            </li>
+                            <li class="axil-search d-xl-none d-block">
                                 <a href="javascript:void(0)" class="header-search-icon" title="Search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </a>
@@ -144,7 +150,7 @@
                                     <i class="flaticon-heart"></i>
                                 </a>
                             </li>
-                            @if (Session::get('customer_id'))
+                             @if (Session::get('customer_id'))
                                 <li class="shopping-cart">
                                     <a href="{{route('cart.view')}}">
                                         <i class="flaticon-shopping-cart"></i>
@@ -153,12 +159,11 @@
                                 </li>
 
                             @endif
-
                             <li class="my-account">
                                 <a href="javascript:void(0)">
                                     <i class="flaticon-person"></i>
                                 </a>
-                                @if (Session::get('customer_id'))
+                                 @if (Session::get('customer_id'))
                                     <div class="my-account-dropdown">
                                         <span class="title">QUICKLINKS</span>
                                         <ul>
@@ -185,7 +190,6 @@
                                     </div>
 
                                 @endif
-
                             </li>
                             <li class="axil-mobile-toggle">
                                 <button class="menu-btn mobile-nav-toggler">
@@ -197,8 +201,27 @@
                 </div>
             </div>
         </div>
-
         <!-- End Mainmenu Area -->
+        <div class="header-top-campaign">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5 col-lg-6 col-md-10">
+                        <div class="header-campaign-activation axil-slick-arrow arrow-both-side header-campaign-arrow">
+                            <div class="slick-slide">
+                                <div class="campaign-content">
+                                    <p>SEE NOW NEW OFFER PRODUCT : <a href="{{route('product.offer')}}">GET OFFER</a></p>
+                                </div>
+                            </div>
+                            <div class="slick-slide">
+                                <div class="campaign-content">
+                                    <p>POPULAR PRODUCT : <a href="">BUY NOW</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     @yield('contain')
@@ -998,16 +1021,15 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
                                     @if (Session::get('customer_id'))
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="{{route('customer.dashboard')}}">My Account</a></li>
+                                    <li><a href="{{route('cart')}}">Cart</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('product.all')}}">Shop</a></li>
                                     @else
                                     <li><a href="{{route('employee.login')}}">Employee Account</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('product.all')}}">Shop</a></li>
                                     @endif
 
 

@@ -58,7 +58,7 @@ class ProductController extends Controller
 
     public function discountProduct($id)
     {
-        return view('employee.product.addDiscount', ['product' =>product::find($id)]);
+        return view('employee.product.addDiscount', ['product' =>Product::find($id)]);
     }
 
     public function discountAddProduct(Request $request, $id)

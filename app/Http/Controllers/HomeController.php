@@ -29,6 +29,27 @@ class HomeController extends Controller
         ]);
     }
 
+    public function offerProduct(Request $request)
+    {
+        $query = Product::where('Offer_status', 1);
+
+
+        if ($request->has('category') && $request->category != 'all') {
+            $query->where('category_id', $request->category);
+            $selectedCategoryId = $request->category;
+        } else {
+            $selectedCategoryId = null;
+        }
+
+        $products = $query->simplePaginate(8);
+        $categories = Category::all();
+        return view('website.product.offer-product',[
+            'products' => $products,
+            'categories' => $categories,
+            'selectedCategoryId' => $selectedCategoryId,
+        ]);
+    }
+
     public function productdetails($id)
     {
         $customerId = Session::get('customer_id');
